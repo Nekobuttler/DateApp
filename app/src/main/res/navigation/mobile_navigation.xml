@@ -3,23 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_User">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.dateappproject.ViewModel.ui.home.HomeFragment"
+        android:id="@+id/nav_User"
+        android:name="com.example.dateappproject.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_User_to_dataUserUpdate"
+            app:destination="@id/dataUserUpdate" />
+        <action
+            android:id="@+id/action_nav_User_to_dataUserFragment"
+            app:destination="@id/dataUserFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.dateappproject.ViewModel.ui.gallery.GalleryFragment"
+        android:name="com.example.dateappproject.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.dateappproject.ViewModel.ui.slideshow.SlideshowFragment"
+        android:name="com.example.dateappproject.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/dataUserFragment"
+        android:name="com.example.dateappproject.ui.Users.DataUserFragment"
+        android:label="fragment_data_user"
+        tools:layout="@layout/fragment_data_user" >
+        <action
+            android:id="@+id/action_dataUserFragment_to_nav_User"
+            app:destination="@id/nav_User" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.dateappproject.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/dataUserUpdate"
+        android:name="com.example.dateappproject.ui.Users.dataUserUpdate"
+        android:label="fragment_data_user_update"
+        tools:layout="@layout/fragment_data_user_update" >
+        <action
+            android:id="@+id/action_dataUserUpdate_to_nav_User"
+            app:destination="@id/nav_User" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.dateappproject.Auth.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <activity
+        android:id="@+id/sign_In_Activity"
+        android:name="com.example.dateappproject.Auth.Sign_In_Activity"
+        android:label="activity_sign_in"
+        tools:layout="@layout/activity_sign_in" />
+    <activity
+        android:id="@+id/loginMainActivity"
+        android:name="com.example.dateappproject.Auth.LoginMainActivity"
+        android:label="login_fragment"
+        tools:layout="@layout/login_activity" />
 </navigation>

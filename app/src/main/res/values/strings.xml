@@ -25,4 +25,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_date_app_main">DateAppMainActivity</string>
+
+    <string name="msg_img">Upload your photos</string>
+    <string name="todo">Later...</string>
+    <string name="msg_user_added">User added succesfuly...</string>
+
+    <string name="DateAppName">Dating.</string>
+    <string name="LoginTitle">Welcome to the app where you know people</string>
+
+
+
+
+
 </resources>

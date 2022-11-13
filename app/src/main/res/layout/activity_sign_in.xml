@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Auth.sign_in_fragment" >
+    tools:context=".Auth.Sign_In_Activity" >
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
@@ -48,13 +48,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageButton
-            android:id="@+id/bt_login"
-            android:layout_width="199dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_login" />
+        android:layout_height="53dp">
 
         <ImageButton
             android:id="@+id/bt_signin"
@@ -64,5 +58,26 @@
             android:src="@drawable/ic_signin" />
 
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already got an account register here"
+            tools:layout_editor_absoluteX="92dp"
+            tools:layout_editor_absoluteY="196dp" />
+
+        <Button
+            android:id="@+id/bt_Login_Sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            tools:layout_editor_absoluteX="152dp"
+            tools:layout_editor_absoluteY="333dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

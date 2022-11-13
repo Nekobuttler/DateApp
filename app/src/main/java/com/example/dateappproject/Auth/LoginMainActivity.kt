@@ -6,9 +6,9 @@ import android.util.Log
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
+import com.example.dateappproject.DateAppMainActivity
+import com.example.dateappproject.databinding.LoginActivityBinding
 
-
-import com.example.dateappproject.databinding.LoginFragmentBinding
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -18,11 +18,14 @@ import java.security.Principal
 
 class LoginMainActivity : AppCompatActivity() {
 
-    private lateinit var auth : FirebaseAuth
+
 
     //Definimos un objeto para acceder a los elementos
 
-    private lateinit var binding: LoginFragmentBinding
+    private lateinit var binding: LoginActivityBinding
+
+
+    private lateinit var auth : FirebaseAuth
 
     //
 
@@ -31,7 +34,7 @@ class LoginMainActivity : AppCompatActivity() {
 
 
 
-        binding=LoginFragmentBinding.inflate(layoutInflater)
+        binding=LoginActivityBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
@@ -43,41 +46,20 @@ class LoginMainActivity : AppCompatActivity() {
 
         //Definimos los eventos Onclick
 
-        binding.btSignin.setOnClickListener{
-            SignIn()
-        }
+
 
         binding.btLogin.setOnClickListener{
             LogIn()
         }
 
-
-
     }
 
 
-    private fun SignIn() {
 
-        //Recupero la informacion que le usuario escribio
-        val email= binding.etEmail.text.toString()
-        val password= binding.edPassword.text.toString()
-
-        //Crear el usuario
-        auth.createUserWithEmailAndPassword(email,password)
-            .addOnCompleteListener(this){ task ->
-                if (task.isSuccessful){
-                    val user= auth.currentUser
-                    refresh(user)
-                }else{
-                    Toast.makeText(baseContext,"Fallo", Toast.LENGTH_LONG).show()
-                    refresh(null)
-                }
-            }
-    }
 
     private fun refresh(user: FirebaseUser?) {
         if(user != null){
-            val intent = Intent(this, Principal::class.java)
+            val intent = Intent(this, DateAppMainActivity::class.java)
             startActivity(intent)
 
         }else{

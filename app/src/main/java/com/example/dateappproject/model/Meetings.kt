@@ -5,7 +5,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Users(
+data class Meetings(
 
     var id : String,
     val name :String?,
@@ -13,13 +13,11 @@ data class Users(
     val cellphone : String?,
     val location : Location ?,
     val age : Int?,
-    val biography : String?,
-    val gender : String?,
-    val interests : String?
+    val descrip : String?
 
 
 ):Parcelable  {
 
     constructor():
-            this("" , "" , "" , "" , null, 0  , "" , "" ,"")
+            this("" , "" , "" , "" , null, 0  , "")
 }

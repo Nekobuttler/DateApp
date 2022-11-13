@@ -1,59 +1,190 @@
 package com.example.dateappproject.ui.Users
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.dateappproject.R
+import com.example.dateappproject.databinding.FragmentDataUserBinding
+import com.example.dateappproject.databinding.FragmentDataUserUpdateBinding
+import com.example.dateappproject.model.Users
+import com.example.dateappproject.viewmodel.UserViewModel
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.oAuthCredential
+import com.google.firebase.ktx.Firebase
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DataUserFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class DataUserFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class DataUserFragment : Fragment() {private var _binding: FragmentDataUserBinding? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
+    private lateinit var placeViewModel: UserViewModel
+
+
+    private lateinit var tomarFotoActivity : ActivityResultLauncher<Intent>
+
+
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        placeViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        _binding = FragmentDataUserBinding.inflate(inflater, container, false)
+        //val root: View = binding.root
+
+        binding.btCreateUser.setOnClickListener{
+            //createUser()
+        }
+
+
+
+/*
+        tomarFotoActivity = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()) {
+                result ->
+            if(result.resultCode == Activity.RESULT_OK){
+                imagenUtiles.actualizaFoto()
+            }
+        }
+        */
+
+
+
+
+        return binding.root
+    }
+
+    /*
+    private fun GPSTurnOn() {
+        if(requireActivity().
+            checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED
+            && requireActivity().
+            checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED
+        ){
+            //Pedir autorizacion
+            requireActivity().requestPermissions(arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION ,
+                Manifest.permission.ACCESS_FINE_LOCATION),
+                105)
+
+        }else{
+            val fusedLocalClient : FusedLocationProviderClient =
+                LocationServices.getFusedLocationProviderClient(requireContext())
+            fusedLocalClient.lastLocation.addOnSuccessListener {
+                    location : Location? ->
+                if(location != null){
+                    binding.tvLatitud.text = "${location.latitude}"
+                    binding.tvLongitud.text = "${location.longitude}"
+                    binding.tvAltura.text = "${location.altitude}"
+
+                }else{
+                    binding.tvLatitud.text = "0.0"
+                    binding.tvLongitud.text = "0.0"
+                    binding.tvAltura.text = "0.0"
+                }
+            }
+        }
+
+    }
+
+    */
+
+    /*
+    private fun subirAudio(){
+        val audioFile = audioUtiles.audioFile
+        if(audioFile.exists() && audioFile.isFile && audioFile.canRead()){
+            val rutaLocal = Uri.fromFile(audioFile) //ruta del archivo local....
+            val rutaNube = "placesApp/${Firebase.auth.currentUser?.email}/audios/${audioFile.name}"
+
+            val reference : StorageReference = Firebase.storage.reference.child(rutaNube) // referencia de firebase
+
+            reference.putFile(rutaLocal)
+                .addOnSuccessListener {
+                    reference.downloadUrl.addOnSuccessListener {
+                        val rutaAudio = it.toString()
+                        subeImagen(rutaAudio)
+                    }
+                }.addOnFailureListener(
+                    subeImagen("")
+                )
+        }else{
+            subeImagen("")
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_data_user, container, false)
+     */
+/*
+    private fun subeImagen(): OnFailureListener {
+        //binding.msgMensaje.text = "Subiendo Imagen" // -
+        val imagenFile = imagenUtiles.imagenFile
+        if(imagenFile.exists() && imagenFile.isFile && imagenFile.canRead()){
+            val rutaLocal = Uri.fromFile(imagenFile) //ruta del archivo local....
+            val rutaNube = "placesApp/${Firebase.auth.currentUser?.email}/imagenes/${imagenFile.name}"
+
+            val reference : StorageReference = Firebase.storage.reference.child(rutaNube) // referencia de firebase
+
+            reference.putFile(rutaLocal)
+                .addOnSuccessListener {
+                    reference.downloadUrl.addOnSuccessListener {
+                        val rutaPublicaImagen = it.toString()
+                        addPlace(rutaPublicaAudio , rutaPublicaImagen)
+                    }
+                }.addOnFailureListener(
+                    addPlace(rutaPublicaAudio,"")
+                )
+        }else{
+            addPlace(rutaPublicaAudio,"")
+        }
+    }
+*/
+    //Registro de los datos en la base de datos
+    /*
+    private fun createUser(){
+        val name = binding.etName.text.toString()
+        val number = binding.edNumber.text.toString()
+        val biography = binding.edBiography.text.toString()
+        val birht = binding.edBirthdate.date.toInt()
+        val auth = Firebase.auth.currentUser
+        val email = auth?.email.toString()
+
+        if(name.isNotEmpty() && number.isNotEmpty()){//Al menos se tiene un nombre
+            val user = Users("" , name , email , number , null , birht , biography,"","")
+            UserViewModel.saveUser(user)
+
+            Toast.makeText(requireContext(),getString(R.string.msg_user_added, Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_dataUserFragment_to_nav_User)
+        }else{
+            Toast.makeText(requireContext(),getString(R.string.msg_data), Toast.LENGTH_LONG).show()
+        }
+    }
+    */
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DataUserFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DataUserFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
