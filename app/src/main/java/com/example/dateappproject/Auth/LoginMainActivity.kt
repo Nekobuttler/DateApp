@@ -58,7 +58,7 @@ class LoginMainActivity : AppCompatActivity() {
 
 
     private fun refresh(user: FirebaseUser?) {
-        if(user != null){
+        if(user != null ){
             val intent = Intent(this, DateAppMainActivity::class.java)
             startActivity(intent)
 

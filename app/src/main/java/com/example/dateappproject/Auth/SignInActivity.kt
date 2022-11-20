@@ -16,7 +16,7 @@ import com.google.firebase.ktx.Firebase
 import java.security.Principal
 
 
-class Sign_In_Activity : AppCompatActivity() {
+class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
 
@@ -25,6 +25,9 @@ class Sign_In_Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
 
         binding = ActivitySignInBinding.inflate(layoutInflater)
 
@@ -81,6 +84,7 @@ class Sign_In_Activity : AppCompatActivity() {
 
         }
     }
+    
 
 
     public override fun onStart(){

@@ -1,32 +1,15 @@
 package com.example.dateappproject.ui.Users
 
-import android.Manifest
-import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.location.Location
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.example.dateappproject.R
 import com.example.dateappproject.databinding.FragmentDataUserBinding
-import com.example.dateappproject.databinding.FragmentDataUserUpdateBinding
-import com.example.dateappproject.model.Users
-import com.example.dateappproject.viewmodel.UserViewModel
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.auth.ktx.oAuthCredential
-import com.google.firebase.ktx.Firebase
+import com.example.dateappproject.ui.viewmodel.UserViewModel
 
 
 class DataUserFragment : Fragment() {private var _binding: FragmentDataUserBinding? = null

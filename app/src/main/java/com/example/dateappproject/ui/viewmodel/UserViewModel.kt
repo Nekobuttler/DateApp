@@ -1,4 +1,4 @@
-package com.example.dateappproject.viewmodel
+package com.example.dateappproject.ui.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*

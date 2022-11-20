@@ -59,7 +59,7 @@
         tools:layout="@layout/activity_main" />
     <activity
         android:id="@+id/sign_In_Activity"
-        android:name="com.example.dateappproject.Auth.Sign_In_Activity"
+        android:name="com.example.dateappproject.Auth.SignInActivity"
         android:label="activity_sign_in"
         tools:layout="@layout/activity_sign_in" />
     <activity
@@ -67,4 +67,48 @@
         android:name="com.example.dateappproject.Auth.LoginMainActivity"
         android:label="login_fragment"
         tools:layout="@layout/login_activity" />
+    <fragment
+        android:id="@+id/fragment_name_date"
+        android:name="com.example.dateappproject.BlankFragment2"
+        android:label="name_biography_data"
+        tools:layout="@layout/name_biography_data" >
+        <action
+            android:id="@+id/action_fragment_name_date_to_birthdateData"
+            app:destination="@id/birthdateData" />
+    </fragment>
+    <fragment
+        android:id="@+id/birthdateData"
+        android:name="com.example.dateappproject.BirthdateData"
+        android:label="fragment_birthdate_data"
+        tools:layout="@layout/fragment_birthdate_data" >
+        <action
+            android:id="@+id/action_birthdateData_to_blankFragment"
+            app:destination="@id/blankFragment" />
+        <action
+            android:id="@+id/action_birthdateData_to_blankFragment2"
+            app:destination="@id/interest_data_frag" />
+    </fragment>
+    <fragment
+        android:id="@+id/pictures_data"
+        android:name="com.example.dateappproject.pictures_data"
+        android:label="fragment_pictures_data"
+        tools:layout="@layout/fragment_pictures_data" >
+        <action
+            android:id="@+id/action_pictures_data_to_profileShowUp"
+            app:destination="@id/profileShowUp" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileShowUp"
+        android:name="com.example.dateappproject.ProfileShowUp"
+        android:label="fragment_profile_show_up"
+        tools:layout="@layout/fragment_profile_show_up" />
+    <fragment
+        android:id="@+id/interest_data_frag"
+        android:name="com.example.dateappproject.BlankFragment"
+        android:label="interest_data"
+        tools:layout="@layout/interest_data" >
+        <action
+            android:id="@+id/action_interest_data_frag_to_pictures_data"
+            app:destination="@id/pictures_data" />
+    </fragment>
 </navigation>

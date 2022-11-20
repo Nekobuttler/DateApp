@@ -15,11 +15,17 @@ data class Users(
     val age : Int?,
     val biography : String?,
     val gender : String?,
-    val interests : String?
+    val interests : String?,
+    val birthdate : String?
+
 
 
 ):Parcelable  {
 
+
     constructor():
-            this("" , "" , "" , "" , null, 0  , "" , "" ,"")
+            this("" , "" , "" , "" , null, 0  , "" , "" ,"","")
+
+
 }
+
