@@ -12,7 +12,9 @@
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/activity_main_menu.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/activity_set_up_profile.xml" value="0.33489583333333334" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/activity_sign_in.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/activity_users_selection.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/app_bar_date_app_main.xml" value="0.5" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/app_bar_main_menu.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/content_date_app_main.xml" value="0.28125" />
@@ -28,11 +30,13 @@
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/fragment_pictures_data.xml" value="0.215625" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/fragment_profile_show_up.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/fragment_sign_in_fragment.xml" value="0.22" />
+        <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/interest_data.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/login_activity.xml" value="0.22" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/login_fragment.xml" value="0.67" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/main_page.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/name_biography_data.xml" value="0.33" />
-        <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/nav_header_date_app_main.xml" value="0.25" />
+        <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/nav_header_date_app_main.xml" value="0.33" />
+        <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/layout/profile_card.xml" value="0.22" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/menu/activity_main_drawer.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/menu/date_app_main.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/XPC/DateAppProject/app/src/main/res/menu/main_menu.xml" value="0.23958333333333334" />

@@ -16,7 +16,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 
-class NameBiographyDataBinding : Fragment() {
+class NameBioCellData : Fragment() {
 
 
     private var _binding: NameBiographyDataBinding? = null
@@ -55,7 +55,7 @@ class NameBiographyDataBinding : Fragment() {
 
 
         if(name.isNotEmpty()){//Al menos se tiene un nombre
-            val users = Users("" , name , Firebase.auth.currentUser?.email.toString() , phone , null, 0  , biography , "" ,"","")
+            val users = Users("" , name , Firebase.auth.currentUser?.email.toString() , phone , null, 0  , biography , "" ,"",null)
             userViewModel.saveUser(users)
 
             Toast.makeText(requireContext(),getString(R.string.msg_data_user_act), Toast.LENGTH_SHORT).show()

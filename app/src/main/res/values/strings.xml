@@ -32,10 +32,9 @@
 
     <string name="DateAppName">Dating.</string>
     <string name="LoginTitle">Welcome to the app where you know people</string>
-    
+
     <string name="msg_data_user_act">You have updated your data</string>
     <string name="error_data">We have some problems recollecting your data please try again</string>
-    
-    
+
 
 </resources>

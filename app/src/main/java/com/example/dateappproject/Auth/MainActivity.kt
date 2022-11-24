@@ -19,10 +19,10 @@ import java.security.Principal
 
 
 class MainActivity :AppCompatActivity() {
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     private lateinit var auth : FirebaseAuth
 
-    private lateinit var googleSignInClient: GoogleSignInClient
 
     private lateinit var binding : ActivityMainBinding
 

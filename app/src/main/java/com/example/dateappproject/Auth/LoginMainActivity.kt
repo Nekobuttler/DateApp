@@ -36,7 +36,7 @@ class LoginMainActivity : AppCompatActivity() {
 
         binding=LoginActivityBinding.inflate(layoutInflater)
 
-        setContentView(binding.root)
+        setContentView(binding!!.root)
 
         //Inicializar la autenticacion
 
@@ -52,6 +52,10 @@ class LoginMainActivity : AppCompatActivity() {
             LogIn()
         }
 
+        binding.btSignInLO.setOnClickListener{
+            goSignIn()
+        }
+
     }
 
 
@@ -65,6 +69,13 @@ class LoginMainActivity : AppCompatActivity() {
         }else{
 
         }
+    }
+
+    private fun goSignIn(){
+        val intent = Intent(this , SignInActivity::class.java)
+        startActivity(intent)
+
+
     }
 
     private fun LogIn() {

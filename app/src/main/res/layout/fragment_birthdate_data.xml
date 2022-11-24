@@ -21,15 +21,15 @@
         android:layout_height="wrap_content"
         android:calendarViewShown="false"
         android:datePickerMode="spinner"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="59dp" />
+        tools:layout_editor_absoluteX="71dp"
+        tools:layout_editor_absoluteY="82dp" />
 
-    <DatePicker
-        android:id="@+id/calendar_picker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:calendarViewShown="true"
-        android:datePickerMode="calendar"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="271dp" />
+    <TextView
+        android:id="@+id/birhtdate_shw"
+        android:layout_width="209dp"
+        android:layout_height="25dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="116dp"
+        tools:layout_editor_absoluteY="362dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

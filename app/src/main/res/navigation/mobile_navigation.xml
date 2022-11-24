@@ -68,10 +68,10 @@
         android:label="login_fragment"
         tools:layout="@layout/login_activity" />
     <fragment
-        android:id="@+id/fragment_name_date"
-        android:name="com.example.dateappproject.BlankFragment2"
+        android:id="@+id/name_biography_data"
+        android:name="com.example.dateappproject.NameBioCellData"
         android:label="name_biography_data"
-        tools:layout="@layout/name_biography_data" >
+        tools:layout="@layout/name_biography_data">
         <action
             android:id="@+id/action_fragment_name_date_to_birthdateData"
             app:destination="@id/birthdateData" />
@@ -83,7 +83,7 @@
         tools:layout="@layout/fragment_birthdate_data" >
         <action
             android:id="@+id/action_birthdateData_to_blankFragment"
-            app:destination="@id/blankFragment" />
+            app:destination="@id/interest_data_frag" />
         <action
             android:id="@+id/action_birthdateData_to_blankFragment2"
             app:destination="@id/interest_data_frag" />
@@ -104,9 +104,9 @@
         tools:layout="@layout/fragment_profile_show_up" />
     <fragment
         android:id="@+id/interest_data_frag"
-        android:name="com.example.dateappproject.BlankFragment"
+        android:name="com.example.dateappproject.Interests"
         android:label="interest_data"
-        tools:layout="@layout/interest_data" >
+        tools:layout="@layout/interest_data">
         <action
             android:id="@+id/action_interest_data_frag_to_pictures_data"
             app:destination="@id/pictures_data" />

@@ -1,8 +1,11 @@
 package com.example.dateappproject
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
@@ -14,8 +17,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.dateappproject.Auth.MainActivity
 import com.example.dateappproject.databinding.ActivityDateAppMainBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -38,6 +44,9 @@ class DateAppMainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
+
+
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_date_app_main)
@@ -52,6 +61,16 @@ class DateAppMainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        navView.getHeaderView(0).findViewById<ImageButton>(R.id.ib_logout).setOnClickListener{
+            FirebaseAuth.getInstance().signOut();
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        navView.getHeaderView(0).findViewById<ImageView>(R.id.user_profile_picture).setOnClickListener{
+            val intent = Intent(this, ProfileShowUp::class.java)
+            startActivity(intent)
+        }
+
         update(navView)
     }
 
@@ -66,8 +85,17 @@ class DateAppMainActivity : AppCompatActivity() {
         val pictureURL = user?.photoUrl.toString()
         if(pictureURL.isNotEmpty()){
             Glide.with(this)
-                .load(pictureURL)
-                .load(tvName)
+                .load(R.drawable.music_video_asmr_man)
+                .load("name")
+                //.load(pictureURL)
+                //.load(tvName)
+                .load(tvemail)
+                .circleCrop()
+                .into(image)
+        }else{
+            Glide.with(this)
+                .load(R.drawable.music_video_asmr_man)
+                .load("name")
                 .load(tvemail)
                 .circleCrop()
                 .into(image)

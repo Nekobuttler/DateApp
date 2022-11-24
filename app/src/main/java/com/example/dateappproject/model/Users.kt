@@ -3,6 +3,7 @@ package com.example.dateappproject.model
 import android.location.Location
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import java.util.*
 
 @Parcelize
 data class Users(
@@ -16,7 +17,7 @@ data class Users(
     val biography : String?,
     val gender : String?,
     val interests : String?,
-    val birthdate : String?
+    val birthdate : Calendar?
 
 
 
@@ -24,7 +25,7 @@ data class Users(
 
 
     constructor():
-            this("" , "" , "" , "" , null, 0  , "" , "" ,"","")
+            this("" , "" , "" , "" , null, 0  , "" , "" ,"",null)
 
 
 }

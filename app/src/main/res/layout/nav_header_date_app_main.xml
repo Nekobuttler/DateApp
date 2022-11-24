@@ -34,4 +34,10 @@
         android:layout_height="wrap_content"
         android:text="@string/nav_header_subtitle"
         android:id="@+id/email_user" />
+
+    <ImageButton
+        android:id="@+id/ib_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_login" />
 </LinearLayout>

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.dateappproject" >
+    package="com.example.dateappproject">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="permision.Call_Phone"/>
-    <uses-permission android:name="permision.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="permission.ACCESS_COARSE_LOCATION"/>
-
+    <uses-permission android:name="permision.Call_Phone" />
+    <uses-permission android:name="permision.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
 
     <application
@@ -22,30 +23,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DateAppProject"
-        tools:targetApi="31" >
+        tools:targetApi="33">
+        <activity
+            android:name=".UsersSelection"
+            android:exported="false" />
+        <activity
+            android:name=".SetUpProfile"
+            android:exported="false" />
         <activity
             android:name=".DateAppMainActivity"
             android:exported="false"
             android:label="@string/title_activity_date_app_main"
             android:theme="@style/Theme.DateAppProject.NoActionBar" />
-
         <activity
             android:name=".Auth.MainActivity"
-            android:exported="true" >
-        <!--  android:label="@string/DateAppName"
-        android:theme="@style/Theme.DateAppProject.NoActionBar" > -->
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Auth.LoginMainActivity" />
         <activity android:name=".Auth.SignInActivity" />
 
-
-
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
