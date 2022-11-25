@@ -23,6 +23,7 @@ import com.example.dateappproject.Auth.MainActivity
 import com.example.dateappproject.databinding.ActivityDateAppMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 
 class DateAppMainActivity : AppCompatActivity() {
@@ -31,8 +32,13 @@ class DateAppMainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDateAppMainBinding
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 
      binding = ActivityDateAppMainBinding.inflate(layoutInflater)
      setContentView(binding.root)
@@ -59,6 +65,8 @@ class DateAppMainActivity : AppCompatActivity() {
             R.id.nav_User, R.id.nav_gallery, R.id.nav_slideshow
         ), drawerLayout)
 
+        //Navbar (para la parte deslizante)
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         navView.getHeaderView(0).findViewById<ImageButton>(R.id.ib_logout).setOnClickListener{
@@ -74,6 +82,8 @@ class DateAppMainActivity : AppCompatActivity() {
         update(navView)
     }
 
+
+    //Funciones para mostrar info del propio perfil
     private fun update(navView: NavigationView) {
         val view : View = navView.getHeaderView(0)
         val tvName : TextView = view.findViewById(R.id.name_user)
@@ -103,7 +113,7 @@ class DateAppMainActivity : AppCompatActivity() {
 
     }
 
-
+//Barra de abajo
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.date_app_main, menu)

@@ -22,13 +22,27 @@
         android:id="@+id/nav_gallery"
         android:name="com.example.dateappproject.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_nav_gallery_to_seeUsers"
+            app:destination="@id/seeUsers" />
+        <action
+            android:id="@+id/action_nav_gallery_to_usersSelection"
+            app:destination="@id/usersSelection" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.dateappproject.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_slideshow" >
+        <action
+            android:id="@+id/action_nav_slideshow_to_seeUsers"
+            app:destination="@id/seeUsers" />
+        <action
+            android:id="@+id/action_nav_slideshow_to_usersSelection"
+            app:destination="@id/usersSelection" />
+    </fragment>
     <fragment
         android:id="@+id/dataUserFragment"
         android:name="com.example.dateappproject.ui.Users.DataUserFragment"
@@ -111,4 +125,14 @@
             android:id="@+id/action_interest_data_frag_to_pictures_data"
             app:destination="@id/pictures_data" />
     </fragment>
+    <fragment
+        android:id="@+id/seeUsers"
+        android:name="com.example.dateappproject.seeUsers"
+        android:label="fragment_see_users"
+        tools:layout="@layout/fragment_see_users" />
+    <activity
+        android:id="@+id/usersSelection"
+        android:name="com.example.dateappproject.UsersSelection"
+        android:label="activity_users_selection"
+        tools:layout="@layout/activity_users_selection" />
 </navigation>

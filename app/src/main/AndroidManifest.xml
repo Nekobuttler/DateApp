@@ -25,6 +25,9 @@
         android:theme="@style/Theme.DateAppProject"
         tools:targetApi="33">
         <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".UsersSelection"
             android:exported="false" />
         <activity

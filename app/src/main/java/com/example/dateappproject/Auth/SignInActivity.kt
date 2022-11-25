@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dateappproject.DateAppMainActivity
 import com.example.dateappproject.R
+import com.example.dateappproject.SetUpProfile
 import com.example.dateappproject.databinding.ActivitySignInBinding
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
@@ -78,7 +79,7 @@ class SignInActivity : AppCompatActivity() {
     private fun refresh(user: FirebaseUser?) {
         if(user != null){
 
-            val intent = Intent(this, DateAppMainActivity::class.java)
+            val intent = Intent(this, SetUpProfile::class.java)
             startActivity(intent)
 
         }else{

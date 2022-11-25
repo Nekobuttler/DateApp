@@ -15,13 +15,13 @@ import com.example.dateappproject.R
 import com.example.dateappproject.databinding.ProfileCardBinding
 import com.example.dateappproject.model.Users
 
-class UserAdapter
-    : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserSAdapter(var context: Context , var userList :ArrayList<Users>)
+    : RecyclerView.Adapter<UserSAdapter.UserViewHolder>() {
 
 
-    private var userList = emptyList<Users>()
 
-    inner class UserViewHolder(private val itemBinding: ProfileCardBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+
+    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val binding : ProfileCardBinding = ProfileCardBinding.bind(itemView)
 
@@ -46,23 +46,27 @@ class UserAdapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        var Items =
-            ProfileCardBinding.inflate(LayoutInflater.from(parent.context),
-             parent ,
-            false)
+        var Items = LayoutInflater.from(context).inflate(R.layout.profile_card
+        ,parent
+            ,false)
 
         return UserViewHolder(Items)
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-            val ActualUser = userList[position]
-        holder.GetData(ActualUser)
+            val actualUser = userList[position]
+        holder.binding.username.text = actualUser.name
+        holder.binding.Biography.text = actualUser.biography
+        Glide.with(context).load(actualUser.profileMainPicture)
+            .placeholder(R.drawable.music_video_asmr_man)
+            .into(holder.binding.profileUser)
+        holder.GetData(actualUser)
     }
 
     override fun getItemCount(): Int = userList.size
 
 
-    fun setUsers( users : List<Users>){
+    fun setUsers( users : ArrayList<Users>){
         userList = users
 
         notifyDataSetChanged() // se notifica que el conjunto de datos cambio y se redibuja toda la lista

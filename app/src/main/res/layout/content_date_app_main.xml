@@ -19,4 +19,12 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/mobile_navigation"
         tools:ignore="InvalidId" />
+
+    <Button
+        android:id="@+id/see_user_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="see users"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="381dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

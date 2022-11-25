@@ -13,6 +13,8 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.ktx.Firebase
 import java.security.Principal
 
@@ -26,6 +28,8 @@ class LoginMainActivity : AppCompatActivity() {
 
 
     private lateinit var auth : FirebaseAuth
+
+    private var database : FirebaseDatabase?=null
 
     //
 
@@ -63,6 +67,12 @@ class LoginMainActivity : AppCompatActivity() {
 
     private fun refresh(user: FirebaseUser?) {
         if(user != null ){
+            database = FirebaseDatabase.getInstance()
+            database!!.reference
+                .child("users")
+                .child(auth.uid!!)
+                //Tratar de comprobar si los datos de img ruta y nombre estan llenos
+                //Hacer snapshot guardar datos en variable temporal y luego comparar dentro de esta? 
             val intent = Intent(this, DateAppMainActivity::class.java)
             startActivity(intent)
 

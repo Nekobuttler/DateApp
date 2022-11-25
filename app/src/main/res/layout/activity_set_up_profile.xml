@@ -1,9 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center_horizontal"
     tools:context=".SetUpProfile">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/profilePicture1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        tools:srcCompat="@tools:sample/avatars"
+        />
+
+        <TextView
+            android:text= "Profile_Information"
+            android:textAlignment= "center"
+            android:layout_marginTop= "12dp"
+            android:textSize="19sp"
+            android:textStyle= "bold|normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text= "Please enter your name and
+        the main image of your profile"
+        android:textAlignment= "center"
+        android:textSize="12sp"
+        android:textStyle= "bold|normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text= "Profile_Information"
+        android:textAlignment= "center"
+        android:layout_marginTop= "12dp"
+        android:textStyle= "bold|normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <androidx.cardview.widget.CardView
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        android:layout_height = "wrap_content"
+        android:layout_width = "match_parent"
+        >
+        <LinearLayout
+            android:orientation = "vertical"
+            android:gravity = "center"
+            android:padding ="15dp"
+            android:layout_gravity = "center"
+            android:layout_width ="match_parent"
+            android:layout_height ="wrap_content"
+            >
+            <EditText
+                android:id="@+id/et_username"
+                android:hint ="Type your name"
+                android:padding ="10dp"
+                android:ems="1"
+                android:textSize="20sp"
+                android:layout_height = "wrap_content"
+                android:layout_width = "match_parent"
+            />
+            <Button
+                android:id="@+id/bt_continue_profile"
+                android:textStyle="bold|normal"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:text="Continue"
+                app:backgroundTint="#4FAF1B"
+                android:layout_height = "wrap_content"
+                android:layout_width = "match_parent"
+                />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

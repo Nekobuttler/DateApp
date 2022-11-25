@@ -73,7 +73,7 @@ class UsersDao {
 
         val document: DocumentReference
 
-        if (User.id.isEmpty()) { //Nuevo regitro
+        if (User.id!!.isEmpty()) { //Nuevo regitro
 
             document = firestore
                 .collection("DateApp")
@@ -107,13 +107,13 @@ class UsersDao {
     }
 
     fun DeleteUser(User: Users) {
-        if (User.id.isNotEmpty()) { //Nuevo regitro
+        if (User.id!!.isNotEmpty()) { //Nuevo regitro
 
             firestore
                 .collection("DateApp")
                 .document(UserCode)
                 .collection("MyLikes")
-                .document(User.id)
+                .document(User.id!!)
                 .delete()
                 .addOnSuccessListener {
                     Log.d(

@@ -8,7 +8,7 @@ import java.util.*
 @Parcelize
 data class Users(
 
-    var id : String,
+    var id : String?,
     val name :String?,
     val email : String?,
     val cellphone : String?,
@@ -17,7 +17,8 @@ data class Users(
     val biography : String?,
     val gender : String?,
     val interests : String?,
-    val birthdate : Calendar?
+    val birthdate : Calendar?,
+    val profileMainPicture : String?
 
 
 
@@ -25,7 +26,7 @@ data class Users(
 
 
     constructor():
-            this("" , "" , "" , "" , null, 0  , "" , "" ,"",null)
+            this("" , "" , "" , "" , null, 0  , "" , "" ,"",null,"")
 
 
 }

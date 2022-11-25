@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.dateappproject.R
 import com.example.dateappproject.databinding.FragmentSlideshowBinding
 
 class SlideshowFragment : Fragment() {
@@ -24,6 +26,7 @@ private var _binding: FragmentSlideshowBinding? = null
     val slideshowViewModel =
             ViewModelProvider(this).get(SlideshowViewModel::class.java)
 
+
     _binding = FragmentSlideshowBinding.inflate(inflater, container, false)
     val root: View = binding.root
 
@@ -31,6 +34,9 @@ private var _binding: FragmentSlideshowBinding? = null
     slideshowViewModel.text.observe(viewLifecycleOwner) {
       textView.text = it
     }
+      _binding!!.btUserlist.setOnClickListener {
+          findNavController().navigate(R.id.action_nav_slideshow_to_usersSelection)
+      }
     return root
   }
 

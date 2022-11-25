@@ -17,7 +17,7 @@
 
     <View
         android:id="@+id/view"
-        android:backgroun="#535155"
+        android:background ="#535155"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="15dp"
@@ -34,7 +34,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/usersList"
             tools:listitem="@layout/profile_card"
-            android:layout_withd="match_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             />

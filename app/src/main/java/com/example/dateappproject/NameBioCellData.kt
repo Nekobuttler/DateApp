@@ -55,7 +55,7 @@ class NameBioCellData : Fragment() {
 
 
         if(name.isNotEmpty()){//Al menos se tiene un nombre
-            val users = Users("" , name , Firebase.auth.currentUser?.email.toString() , phone , null, 0  , biography , "" ,"",null)
+            val users = Users("" , name , Firebase.auth.currentUser?.email.toString() , phone , null, 0  , biography , "" ,"",null,"")
             userViewModel.saveUser(users)
 
             Toast.makeText(requireContext(),getString(R.string.msg_data_user_act), Toast.LENGTH_SHORT).show()
