@@ -2,19 +2,24 @@ package com.example.dateappproject.Auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dateappproject.DateAppMainActivity
-import com.example.dateappproject.R
 import com.example.dateappproject.SetUpProfile
+import com.example.dateappproject.SetUpProfile2
 import com.example.dateappproject.databinding.ActivitySignInBinding
+import com.example.dateappproject.model.Users
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import java.security.Principal
 
 
 class SignInActivity : AppCompatActivity() {
@@ -23,7 +28,15 @@ class SignInActivity : AppCompatActivity() {
 
     private lateinit var auth : FirebaseAuth
 
+    private var firestore: FirebaseFirestore
 
+    init {
+        firestore = FirebaseFirestore.getInstance()
+
+        firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
+
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -68,23 +81,75 @@ class SignInActivity : AppCompatActivity() {
             .addOnCompleteListener(this){ task ->
                 if (task.isSuccessful){
                     val user= auth.currentUser
+                    var User = Users(auth.currentUser!!.uid , "" , auth.currentUser!!.email , "" , null, 0  , "" , "" ,"",null,"")
                     refresh(user)
-                }else{
+                }
+
+                else{
                     Toast.makeText(baseContext,"Fallo", Toast.LENGTH_LONG).show()
                     refresh(null)
                 }
             }
     }
 
-    private fun refresh(user: FirebaseUser?) {
-        if(user != null){
+    private fun refresh(user: FirebaseUser?)
+    {if(user != null ){
+        firestore.collection("Users")
+            .document(auth.currentUser!!.uid)
+            .get().addOnSuccessListener {
+                    documentSnapshot ->
+                val User = documentSnapshot.toObject<Users>()
+                if(User?.name!!.isEmpty() ||
+                    User?.name!!.isEmpty()){
+                    val intent = Intent(this, SetUpProfile::class.java)
+                    startActivity(intent)
 
-            val intent = Intent(this, SetUpProfile::class.java)
-            startActivity(intent)
+                }
 
-        }else{
+            }
 
+        //Tratar de comprobar si los datos de img ruta y nombre estan llenos
+        //Hacer snapshot guardar datos en variable temporal y luego comparar dentro de esta?
+        val intent = Intent(this, DateAppMainActivity::class.java)
+        startActivity(intent)
+
+    }else{
+
+
+    }
+}
+    fun SaveUser(User: Users) { //Primero objeto luego clase que pertenece
+
+        val document: DocumentReference
+
+        if (User.id!!.isEmpty()) { //Nuevo regitro
+
+            document = firestore
+                .collection("Users")
+                .document()
+            User.id = document.id
+
+            //For Updates
+        } else {
+            document = firestore
+                .collection("Users")
+                .document(auth.currentUser!!.uid)
         }
+
+        val set = document.set(User) // Update or Save the user in the document find o created
+        set.addOnSuccessListener {
+            Log.d(
+                "Add User",
+                "User Added"
+            )
+        }
+            .addOnCanceledListener {
+                Log.e(
+                    "Add User",
+                    "User Not Added"
+                )
+            }
+
     }
     
 

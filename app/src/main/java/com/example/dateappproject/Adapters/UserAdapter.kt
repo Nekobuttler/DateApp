@@ -29,6 +29,7 @@ class UserAdapter
             binding.username.text  = user.name
             binding.Biography.text = user.biography
 
+
             Glide.with(binding.root.context)
                 .load(user.profileMainPicture)
                 .circleCrop()

@@ -14,7 +14,9 @@ import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 import kotlin.collections.HashMap
 
-class SetUpProfile : AppCompatActivity() {
+//No usar
+
+class SetUpProfile2 : AppCompatActivity() {
 
     var binding : ActivitySetUpProfileBinding? = null
 
@@ -28,6 +30,8 @@ class SetUpProfile : AppCompatActivity() {
 
     private var dialog: ProgressDialog? =null
 
+    private var database : FirebaseDatabase?=null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +39,7 @@ class SetUpProfile : AppCompatActivity() {
         setContentView(binding!!.root)
         dialog!!.setMessage("Updating Profile")
         dialog!!.setCancelable(false)
-
+        database = FirebaseDatabase.getInstance()
         storage = FirebaseStorage.getInstance()
         auth = FirebaseAuth.getInstance()
         supportActionBar?.hide()
@@ -71,13 +75,17 @@ class SetUpProfile : AppCompatActivity() {
                             val email =  auth!!.currentUser?.email.toString()
                             val name : String? = binding!!.etUsername.text.toString()
                             val user = Users(uid , name , email , "" , null, 0  , "" , "" ,"",null,imageUrl)
-                           userViewModel.saveUser(user)
+                            database!!.reference
+                                .child("users")
+                                .child(uid!!)
+                                .setValue(user)
+                                .addOnCompleteListener{
                                     dialog!!.dismiss()
                                     val intent =
                                         Intent(this, DateAppMainActivity::class.java)
                                     startActivity(intent)
                                     finish()
-
+                                }
 
                         }
                     }
@@ -87,13 +95,17 @@ class SetUpProfile : AppCompatActivity() {
                         val email =  auth!!.currentUser?.email.toString()
                         val name : String? = binding!!.etUsername.text.toString()
                         val user = Users(uid , name , email , "" , null, 0  , "" , "" ,"",null,"")
-                        userViewModel.saveUser(user)
+                        database!!.reference
+                            .child("users")
+                            .child(uid!!)
+                            .setValue(user)
+                            .addOnCompleteListener {
                                 dialog!!.dismiss()
-                                val intent = Intent(this@SetUpProfile
+                                val intent = Intent(this@SetUpProfile2
                                 , DateAppMainActivity :: class.java)
                                 startActivity(intent)
                                 finish()
-
+                            }
                     }
                 }
             }
@@ -114,7 +126,23 @@ class SetUpProfile : AppCompatActivity() {
                 val reference = storage.reference
                     .child("Profile")
                     .child(time.toString()+"")
+                reference.putFile(uri!!).addOnCompleteListener {
+                    task ->
+                    if(task.isSuccessful){
+                        reference.downloadUrl.addOnCompleteListener{
+                            uri ->
+                            val filePath = uri!!.toString()
+                            val obj = HashMap<String , Any>()
+                            obj["image"] = filePath
+                            database!!.reference
+                                .child("users")
+                                .child(auth!!.uid!!)
+                                .updateChildren(obj).addOnSuccessListener{}
 
+                        }
+                    }
+
+                }
                 binding!!.profilePicture1.setImageURI(data.data)
                 selectedImage = data.data
             }

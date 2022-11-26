@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dateappproject.Adapters.UserAdapter
 import com.example.dateappproject.Adapters.UserSAdapter
 import com.example.dateappproject.databinding.ActivityDateAppMainBinding
 import com.example.dateappproject.databinding.ActivityUsersSelectionBinding

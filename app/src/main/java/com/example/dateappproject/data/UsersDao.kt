@@ -69,6 +69,43 @@ class UsersDao {
         return UsersList;
     }
 
+
+
+
+
+    fun getUsers(): MutableLiveData<List<Users>> {
+        val UsersList =
+            MutableLiveData<List<Users>>()     //    : -> Tipo de dato      = -> definicion de dato
+        firestore.collection("Users")
+            .addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    return@addSnapshotListener
+                }
+                if (snapshot != null) {
+                    val list = ArrayList<Users>()
+                    val users =
+                        snapshot.documents  //Obtine los datos del snapshot en otras palabras json de usuarios
+
+                    users.forEach { user->
+                        val User =
+                            user.toObject(Users::class.java) // --> aqui define la clase y transforma los objetos desconocidos en la clase
+                        if (User != null) {
+                            list.add(User)   //Los agrega a la lista
+                        }
+                    }
+                    UsersList.value =
+                        list  //Traslada los datos obtenidos de la lista temp a la lista de respuesta
+
+
+                }
+
+            }
+        return UsersList;
+    }
+
+
+
+
     fun SaveUser(User: Users) { //Primero objeto luego clase que pertenece
 
         val document: DocumentReference
@@ -76,21 +113,18 @@ class UsersDao {
         if (User.id!!.isEmpty()) { //Nuevo regitro
 
             document = firestore
-                .collection("DateApp")
-                .document(UserCode)
-                .collection("MyLikes")
+                .collection("Users")
                 .document()
-
             User.id = document.id
+
+            //For Updates
         } else {
             document = firestore
-                .collection("DateApp")
-                .document(UserCode)
-                .collection("MyLikes")
+                .collection("Users")
                 .document(UserCode)
         }
 
-        val set = document.set(User)
+        val set = document.set(User) // Update or Save the user in the document find o created
         set.addOnSuccessListener {
             Log.d(
                 "Add User",
@@ -110,10 +144,8 @@ class UsersDao {
         if (User.id!!.isNotEmpty()) { //Nuevo regitro
 
             firestore
-                .collection("DateApp")
+                .collection("Users")
                 .document(UserCode)
-                .collection("MyLikes")
-                .document(User.id!!)
                 .delete()
                 .addOnSuccessListener {
                     Log.d(

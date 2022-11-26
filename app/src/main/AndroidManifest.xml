@@ -23,6 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DateAppProject"
+        android:enableOnBackInvokedCallback="true"
         tools:targetApi="33">
         <activity
             android:name=".ChatActivity"
@@ -31,7 +32,7 @@
             android:name=".UsersSelection"
             android:exported="false" />
         <activity
-            android:name=".SetUpProfile"
+            android:name=".SetUpProfile2"
             android:exported="false" />
         <activity
             android:name=".DateAppMainActivity"

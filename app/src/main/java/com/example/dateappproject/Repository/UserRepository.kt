@@ -6,7 +6,7 @@ import com.example.dateappproject.model.Users
 
 class UserRepository (private val usersDao : UsersDao ) {
 
-    val getAllData : MutableLiveData<List<Users>> = usersDao.getAllData()
+    val getAllData : MutableLiveData<List<Users>> = usersDao.getUsers()
 
 
     fun addUser (user: Users ){
