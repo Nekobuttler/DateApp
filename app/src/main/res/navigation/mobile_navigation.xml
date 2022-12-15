@@ -126,7 +126,11 @@
         android:id="@+id/chatActivity"
         android:name="com.example.dateappproject.ChatActivity"
         android:label="activity_chat"
-        tools:layout="@layout/activity_chat" />
+        tools:layout="@layout/activity_chat" >
+        <argument
+            android:name="user"
+            app:argType="com.example.dateappproject.model.Users" />
+    </activity>
     <fragment
         android:id="@+id/usersViewFragment"
         android:name="com.example.dateappproject.UsersViewFragment"

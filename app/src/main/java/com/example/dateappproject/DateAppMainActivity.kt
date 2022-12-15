@@ -21,9 +21,12 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.dateappproject.Auth.MainActivity
 import com.example.dateappproject.databinding.ActivityDateAppMainBinding
+import com.example.dateappproject.model.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
 class DateAppMainActivity : AppCompatActivity() {
@@ -32,11 +35,12 @@ class DateAppMainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDateAppMainBinding
 
-
+    private val firestore : FirebaseFirestore = FirebaseFirestore.getInstance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
 
 
@@ -90,26 +94,32 @@ class DateAppMainActivity : AppCompatActivity() {
         val tvemail : TextView = view.findViewById(R.id.email_user)
         val image : ImageView = view.findViewById(R.id.user_profile_picture)
         val user = Firebase.auth.currentUser
-        tvName.text = user?.displayName
-        tvemail.text = user?.email
-        val pictureURL = user?.photoUrl.toString()
-        if(pictureURL.isNotEmpty()){
-            Glide.with(this)
-                .load(R.drawable.music_video_asmr_man)
-                .load(tvName)
-                //.load(pictureURL)
-                //.load(tvName)
-                .load(tvemail)
-                .circleCrop()
-                .into(image)
-        }else{
-            Glide.with(this)
-                .load(R.drawable.ic_baseline_person_outline_24)
-                .load("name")
-                .load(tvemail)
-                .circleCrop()
-                .into(image)
-        }
+        firestore.collection("Users")
+            .document(user!!.uid)
+            .get().addOnSuccessListener { documentSnapshot ->
+                val User = documentSnapshot.toObject<Users>()
+
+                tvName.text = User!!.name
+                tvemail.text = User.email
+                val pictureURL = User.profileMainPicture
+                if (pictureURL!!.isNotEmpty()) {
+                    Glide.with(this)
+                        .load(R.drawable.music_video_asmr_man)
+                        .load(tvName)
+                        //.load(pictureURL)
+                        //.load(tvName)
+                        .load(tvemail)
+                        .circleCrop()
+                        .into(image)
+                } else {
+                    Glide.with(this)
+                        .load(R.drawable.ic_baseline_person_outline_24)
+                        .load("name")
+                        .load(tvemail)
+                        .circleCrop()
+                        .into(image)
+                }
+            }
 
     }
 

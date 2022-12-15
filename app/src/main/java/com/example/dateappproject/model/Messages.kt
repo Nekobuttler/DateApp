@@ -3,6 +3,7 @@ package com.example.dateappproject.model
 import android.location.Location
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import java.util.*
 
 //Cada mensaje tendra una coleccion chat adjuntado a esta por lo
 //que la jerarquia seria de user->chats->mensajes
@@ -14,12 +15,12 @@ data class Messages(
     val text :String?,
     val type : String?,
     val imageUrl : String?,
-    val time : Long?,
-    var senderId : String
+    val time : Date?,
+    var senderId : String?
 
 
 ):Parcelable  {
 
     constructor():
-            this("" , "" , "" , ""  ,0,"")
+            this("" , "" , "" , ""  ,null,"")
 }

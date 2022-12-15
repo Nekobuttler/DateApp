@@ -49,13 +49,21 @@ class UserAdapter
             itemBinding.cardViewUsers.setOnClickListener {
 
                 val action =
-                UsersViewFragmentDirections.actionUsersViewFragmentToChatActivity()
+                UsersViewFragmentDirections.actionUsersViewFragmentToChatActivity(user)
+
 
                 itemView.findNavController().navigate(action)
+
                 Log.d("Information Message","Se ha trasladado a otra pesta;a ")
+
+
+
             }
 
         }
+
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
