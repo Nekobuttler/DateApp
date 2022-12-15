@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_gravity="end">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:layout_gravity="end"
+            >
+
+        <TextView
+            android:id="@+id/timeSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12:15"
+            android:textAlignment="textStart"
+            android:textColor="#000000"
+            android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sendMessageHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="end"
+        android:layout_gravity="end"
+        android:background="@drawable/send_form"
+        android:layout_margin="18dp">
+
+
+        <TextView
+            android:id="@+id/sendMessage"
+            android:text="prueba"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textAlignment="textStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+
+
+    </LinearLayout>
+
+
+    </LinearLayout>
+    <ImageView
+        android:gravity="end"
+        android:layout_gravity="end"
+        android:id="@+id/img_Receive"
+        android:layout_width="200dp"
+        android:layout_height="130dp"
+        android:src="@drawable/example"
+        >
+
+
+    </ImageView>
+
+</LinearLayout>

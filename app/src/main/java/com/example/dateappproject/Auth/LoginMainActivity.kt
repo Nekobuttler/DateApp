@@ -29,15 +29,15 @@ class LoginMainActivity : AppCompatActivity() {
 
     //Definimos un objeto para acceder a los elementos
 
-    private lateinit var binding: LoginActivityBinding
+        private lateinit var binding: LoginActivityBinding
 
 
-    private lateinit var auth : FirebaseAuth
+        private lateinit var auth : FirebaseAuth
 
-    private var firestore: FirebaseFirestore
+        private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     init {
-        firestore = FirebaseFirestore.getInstance()
+
 
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
 
@@ -85,12 +85,14 @@ class LoginMainActivity : AppCompatActivity() {
                 .get().addOnSuccessListener {
                         documentSnapshot ->
                     val User = documentSnapshot.toObject<Users>()
-                    if(User?.name!!.isEmpty() ||
-                        User?.name!!.isEmpty()){
+                    if(User?.name!!.isEmpty()){
                         val intent = Intent(this, SetUpProfile::class.java)
                         startActivity(intent)
 
-                }
+                }else{
+                        val intent = Intent(this, DateAppMainActivity::class.java)
+                        startActivity(intent)
+                    }
 
                     }
 

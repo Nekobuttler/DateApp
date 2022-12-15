@@ -27,22 +27,10 @@
             android:id="@+id/action_nav_gallery_to_seeUsers"
             app:destination="@id/seeUsers" />
         <action
-            android:id="@+id/action_nav_gallery_to_usersSelection"
-            app:destination="@id/usersSelection" />
+            android:id="@+id/action_nav_gallery_to_usersViewFragment"
+            app:destination="@id/usersViewFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.dateappproject.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" >
-        <action
-            android:id="@+id/action_nav_slideshow_to_seeUsers"
-            app:destination="@id/seeUsers" />
-        <action
-            android:id="@+id/action_nav_slideshow_to_usersSelection"
-            app:destination="@id/usersSelection" />
-    </fragment>
     <fragment
         android:id="@+id/dataUserFragment"
         android:name="com.example.dateappproject.ui.Users.DataUserFragment"
@@ -129,10 +117,31 @@
         android:id="@+id/seeUsers"
         android:name="com.example.dateappproject.seeUsers"
         android:label="fragment_see_users"
-        tools:layout="@layout/fragment_see_users" />
+        tools:layout="@layout/fragment_see_users" >
+        <action
+            android:id="@+id/action_seeUsers_to_chatActivity"
+            app:destination="@id/chatActivity" />
+    </fragment>
     <activity
-        android:id="@+id/usersSelection"
-        android:name="com.example.dateappproject.UsersSelection"
-        android:label="activity_users_selection"
-        tools:layout="@layout/activity_users_selection" />
+        android:id="@+id/chatActivity"
+        android:name="com.example.dateappproject.ChatActivity"
+        android:label="activity_chat"
+        tools:layout="@layout/activity_chat" />
+    <fragment
+        android:id="@+id/usersViewFragment"
+        android:name="com.example.dateappproject.UsersViewFragment"
+        android:label="fragment_users_view"
+        tools:layout="@layout/fragment_users_view" >
+        <action
+            android:id="@+id/action_usersViewFragment_to_nav_gallery"
+            app:destination="@id/nav_gallery" />
+        <action
+            android:id="@+id/action_usersViewFragment_to_chatActivity"
+            app:destination="@id/chatActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/slideshowFragment"
+        android:name="com.example.dateappproject.ui.slideshow.SlideshowFragment"
+        android:label="fragment_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
 </navigation>

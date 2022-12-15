@@ -18,7 +18,8 @@ data class Users(
     val gender : String?,
     val interests : String?,
     val birthdate : Calendar?,
-    val profileMainPicture : String?
+    val profileMainPicture : String?,
+
 
 
 

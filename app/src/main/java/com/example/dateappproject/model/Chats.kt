@@ -11,8 +11,7 @@ import kotlinx.parcelize.Parcelize
 data class Chats(
 
     var id : String,
-    val user1 :Users?,
-    val user2 : Users?,
+    val senderId :String,
     val messages : Messages?
 
 
@@ -20,5 +19,5 @@ data class Chats(
 ):Parcelable  {
 
     constructor():
-            this("" , null , null , null)
+            this("" , "" , null )
 }

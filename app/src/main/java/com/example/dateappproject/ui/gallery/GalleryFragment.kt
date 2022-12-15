@@ -42,7 +42,7 @@ private var _binding: FragmentGalleryBinding? = null
     }
 
       _binding!!.btUserlist.setOnClickListener {
-          findNavController().navigate(R.id.action_nav_gallery_to_usersSelection)
+          findNavController().navigate(R.id.action_nav_gallery_to_usersViewFragment)
 
       }
     return root

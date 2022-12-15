@@ -18,7 +18,7 @@ class UsersDao {
 
     private var UserCode: String
 
-    private var firestore: FirebaseFirestore
+    private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
 
     init {
@@ -77,16 +77,14 @@ class UsersDao {
         val UsersList =
             MutableLiveData<List<Users>>()     //    : -> Tipo de dato      = -> definicion de dato
         firestore.collection("Users")
-            .addSnapshotListener { snapshot, e ->
-                if (e != null) {
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
                     return@addSnapshotListener
                 }
                 if (snapshot != null) {
                     val list = ArrayList<Users>()
-                    val users =
-                        snapshot.documents  //Obtine los datos del snapshot en otras palabras json de usuarios
 
-                    users.forEach { user->
+                    snapshot.documents.forEach { user->
                         val User =
                             user.toObject(Users::class.java) // --> aqui define la clase y transforma los objetos desconocidos en la clase
                         if (User != null) {

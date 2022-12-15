@@ -28,15 +28,8 @@ class SignInActivity : AppCompatActivity() {
 
     private lateinit var auth : FirebaseAuth
 
-    private var firestore: FirebaseFirestore
+    private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    init {
-        firestore = FirebaseFirestore.getInstance()
-
-        firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
-
-
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,8 +40,6 @@ class SignInActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-
-        FirebaseApp.initializeApp(this)
 
         auth = Firebase.auth
 
@@ -80,9 +71,13 @@ class SignInActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email,password)
             .addOnCompleteListener(this){ task ->
                 if (task.isSuccessful){
+                    val document : DocumentReference =  firestore.collection("Users").document()
+                    // if the creation of the account is succesful create the account with the data
+                    var User:Users = Users(auth.currentUser!!.uid , "" , auth.currentUser!!.email , "" , null, 0  , "" , "" ,"",null,"")
+                    SaveUser(User)
                     val user= auth.currentUser
-                    var User = Users(auth.currentUser!!.uid , "" , auth.currentUser!!.email , "" , null, 0  , "" , "" ,"",null,"")
-                    refresh(user)
+                    val intent = Intent(this, SetUpProfile::class.java)
+                    startActivity(intent)
                 }
 
                 else{
@@ -93,25 +88,27 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun refresh(user: FirebaseUser?)
-    {if(user != null ){
+    {
+        if(user != null ){
         firestore.collection("Users")
             .document(auth.currentUser!!.uid)
             .get().addOnSuccessListener {
                     documentSnapshot ->
-                val User = documentSnapshot.toObject<Users>()
-                if(User?.name!!.isEmpty() ||
-                    User?.name!!.isEmpty()){
+                val User = documentSnapshot.toObject<Users>()  // if the data in the snapshot like name and others is empty then
+                if(User?.name!!.isEmpty() ){                   // go to setup the profil){
                     val intent = Intent(this, SetUpProfile::class.java)
                     startActivity(intent)
 
+                }else{
+                    val intent = Intent(this, DateAppMainActivity::class.java)
+                    startActivity(intent)
                 }
 
             }
 
         //Tratar de comprobar si los datos de img ruta y nombre estan llenos
         //Hacer snapshot guardar datos en variable temporal y luego comparar dentro de esta?
-        val intent = Intent(this, DateAppMainActivity::class.java)
-        startActivity(intent)
+
 
     }else{
 
@@ -127,17 +124,17 @@ class SignInActivity : AppCompatActivity() {
             document = firestore
                 .collection("Users")
                 .document()
-            User.id = document.id
-
+            document.set(User)
             //For Updates
         } else {
             document = firestore
                 .collection("Users")
                 .document(auth.currentUser!!.uid)
+            document.set(User)
         }
 
-        val set = document.set(User) // Update or Save the user in the document find o created
-        set.addOnSuccessListener {
+        document.set(User) // Update or Save the user in the document find o created
+            .addOnSuccessListener {
             Log.d(
                 "Add User",
                 "User Added"

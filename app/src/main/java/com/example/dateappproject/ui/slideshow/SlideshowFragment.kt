@@ -34,9 +34,7 @@ private var _binding: FragmentSlideshowBinding? = null
     slideshowViewModel.text.observe(viewLifecycleOwner) {
       textView.text = it
     }
-      _binding!!.btUserlist.setOnClickListener {
-          findNavController().navigate(R.id.action_nav_slideshow_to_usersSelection)
-      }
+
     return root
   }
 

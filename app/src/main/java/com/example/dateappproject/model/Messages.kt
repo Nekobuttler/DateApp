@@ -13,11 +13,13 @@ data class Messages(
     var id : String,
     val text :String?,
     val type : String?,
-    val time : String?
+    val imageUrl : String?,
+    val time : Long?,
+    var senderId : String
 
 
 ):Parcelable  {
 
     constructor():
-            this("" , "" , "" , ""  )
+            this("" , "" , "" , ""  ,0,"")
 }

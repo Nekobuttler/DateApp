@@ -41,7 +41,7 @@ class BirthdateData : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        userViewModel = ViewModelProvider(this).get(UserViewModel :: class.java)
+       userViewModel = ViewModelProvider(this).get(UserViewModel :: class.java)
         _binding = FragmentBirthdateDataBinding.inflate(inflater , container , false)
 
 

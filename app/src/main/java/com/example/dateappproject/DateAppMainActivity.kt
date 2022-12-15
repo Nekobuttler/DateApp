@@ -96,7 +96,7 @@ class DateAppMainActivity : AppCompatActivity() {
         if(pictureURL.isNotEmpty()){
             Glide.with(this)
                 .load(R.drawable.music_video_asmr_man)
-                .load("name")
+                .load(tvName)
                 //.load(pictureURL)
                 //.load(tvName)
                 .load(tvemail)
@@ -104,7 +104,7 @@ class DateAppMainActivity : AppCompatActivity() {
                 .into(image)
         }else{
             Glide.with(this)
-                .load(R.drawable.music_video_asmr_man)
+                .load(R.drawable.ic_baseline_person_outline_24)
                 .load("name")
                 .load(tvemail)
                 .circleCrop()

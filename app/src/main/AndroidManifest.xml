@@ -24,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DateAppProject"
         android:enableOnBackInvokedCallback="true"
-        tools:targetApi="33">
+        tools:targetApi="30">
         <activity
             android:name=".ChatActivity"
             android:exported="false" />
@@ -50,6 +50,7 @@
         </activity>
         <activity android:name=".Auth.LoginMainActivity" />
         <activity android:name=".Auth.SignInActivity" />
+        <activity android:name=".SetUpProfile" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class UsersSelection : AppCompatActivity() {
@@ -32,11 +34,12 @@ class UsersSelection : AppCompatActivity() {
 
     private lateinit var userViewModel: UserViewModel
 
-    var database : FirebaseDatabase? =null
+
+    var firestore : FirebaseFirestore? =null
+
 
     var users : ArrayList<Users>? = null
 
-    var usersAdapter : UserSAdapter? = null
 
     var diaglog: ProgressDialog? = null
 
@@ -51,56 +54,39 @@ class UsersSelection : AppCompatActivity() {
         binding = ActivityUsersSelectionBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
+        firestore = FirebaseFirestore.getInstance()
         diaglog = ProgressDialog(this@UsersSelection)
         diaglog!!.setMessage("Uploading Image...")
         diaglog!!.setCancelable(false)
-        database = FirebaseDatabase.getInstance()
+
+        //userViewModel = ViewModelProvider(this).get(userViewModel :: class.java)
+
+        userViewModel = userViewModel
+        val usersAdapter = UserAdapter()
+
         users = ArrayList<Users>()
-        usersAdapter = UserSAdapter(this@UsersSelection , users!!)
+
         val layoutManager  = GridLayoutManager(this@UsersSelection , 2)
         binding!!.usersList.layoutManager = layoutManager
-        database!!.reference.child("users")
-            .child(FirebaseAuth.getInstance().uid!!)
-            .addValueEventListener(object  : ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    user = snapshot.getValue(Users :: class.java)
 
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-
-            })
-
-        binding!!.usersList.adapter = usersAdapter
-        database!!.reference.child("users").addValueEventListener(
-            object  : ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    users!!.clear()
-                    for(snapshot1 in snapshot.children){
-                        val user : Users? = snapshot1.getValue(Users :: class.java)
-                        if(!user!!.id.equals(FirebaseAuth.getInstance().uid)) {
-                            users!!.add(user)
-                        }
-                        usersAdapter!!.notifyDataSetChanged()
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
+        val recycler = binding!!.usersList
+        recycler.adapter = usersAdapter
 
 
-            })
-    }
 
+        userViewModel.getUsers.observe(this){
+            users -> usersAdapter.setUsers(users)
+}
+
+
+
+            }
+
+    /*
     override fun onResume() {
         super.onResume()
         val currentId = FirebaseAuth.getInstance().uid
-        database!!.reference
-            .child("presence")
-            .child(currentId!!).setValue("Online")
+        firestore?.collection("Users").document(FirebaseAuth.getInstance().uid.toString()).set()
     }
 
     override fun onPause() {
@@ -110,7 +96,18 @@ class UsersSelection : AppCompatActivity() {
             .child("presence")
             .child(currentId!!).setValue("Offline")
     }
-}
+
+*/
+
+    }
+
+
+
+
+
+
+
+
 
 
 
