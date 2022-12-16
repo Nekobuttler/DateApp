@@ -44,11 +44,11 @@ class SignInActivity : AppCompatActivity() {
         auth = Firebase.auth
 
 
-        binding.btLoginSign.setOnClickListener{
+        binding.tvInfo.setOnClickListener{
             goLogin()
         }
 
-        binding.btSignin.setOnClickListener{
+        binding.btSignIn.setOnClickListener{
             SignIn()
         }
 
@@ -73,7 +73,7 @@ class SignInActivity : AppCompatActivity() {
                 if (task.isSuccessful){
                     val document : DocumentReference =  firestore.collection("Users").document()
                     // if the creation of the account is succesful create the account with the data
-                    var User:Users = Users(auth.currentUser!!.uid , "" , auth.currentUser!!.email , "" , null, 0  , "" , "" ,"",null,"")
+                    var User:Users = Users(auth.currentUser!!.uid , "" , auth.currentUser!!.email , "" , null, 0  , "" , "" ,"","","")
                     SaveUser(User)
                     val user= auth.currentUser
                     val intent = Intent(this, SetUpProfile::class.java)

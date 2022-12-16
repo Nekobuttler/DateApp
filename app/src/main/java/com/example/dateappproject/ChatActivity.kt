@@ -1,5 +1,6 @@
 package com.example.dateappproject
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -37,13 +38,10 @@ class  ChatActivity : AppCompatActivity() {
 
     var adapter : MessageAdapter? = null
 
-    var messages : ArrayList<Messages>? = null
-
     var senderRoom : String? =null
 
     var receiverRoom : String? = null
 
-    var storage : FirebaseStorage? = null
 
     var dialog : ProgressDialog? = null
 
@@ -55,10 +53,13 @@ class  ChatActivity : AppCompatActivity() {
 
     private lateinit var firestore: FirebaseFirestore
 
+    private var messages : ArrayList<Messages>? = null
+
     private val args by navArgs<ChatActivityArgs>()
 
 
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -82,6 +83,7 @@ class  ChatActivity : AppCompatActivity() {
 
         Glide.with(this@ChatActivity).load(profile)
             .placeholder(R.drawable.music_video_asmr_man)
+            .circleCrop()
             .into(binding!!.profileImageChat)
         binding!!.backOption.setOnClickListener{
             finish()
@@ -93,6 +95,7 @@ class  ChatActivity : AppCompatActivity() {
         senderUid = FirebaseAuth.getInstance().uid
 
         firestore.collection("Users").document(receiverUid.toString())
+            .collection("Status").document()
             .addSnapshotListener{ snapshot , e ->
                 if (e != null) {
                     return@addSnapshotListener
@@ -119,10 +122,15 @@ class  ChatActivity : AppCompatActivity() {
 
         senderRoom = senderUid
         receiverRoom = receiverUid
-        adapter = MessageAdapter(this@ChatActivity , messages!!, senderRoom!! , receiverRoom!!)
+
+        adapter = MessageAdapter(this@ChatActivity , messages, senderUid.toString() , receiverUid.toString())
+
+        Log.d("DATOS" ,"${this} ${messages} ${senderUid.toString()} ${receiverUid.toString()}")
 
         binding!!.messagesRecycler.layoutManager = LinearLayoutManager(this@ChatActivity)
+
         binding!!.messagesRecycler.adapter = adapter
+        adapter!!.notifyDataSetChanged()
 
         firestore.collection("Users").document(senderUid.toString()).collection("chats")
             .document(receiverUid.toString()).collection("Messages")
@@ -132,15 +140,19 @@ class  ChatActivity : AppCompatActivity() {
                     return@addSnapshotListener
                 }
                 if(snapshot != null) {
-                    snapshot.documents.forEach{msg ->
+                    val msgs = snapshot.documents
+                    msgs.forEach{msg ->
+
                         val message =  msg.toObject(Messages :: class.java)
                         if(message != null){
                             messages!!.add(message)
+                            adapter!!.notifyDataSetChanged()
+                            adapter!!.notifyItemInserted(1)
                         }
                     }
 
                 }else{
-
+                        Log.d("aviso" , "mensaje nulo")
                 }
 
             }
@@ -149,26 +161,33 @@ class  ChatActivity : AppCompatActivity() {
         binding!!.sendMessage.setOnClickListener {
             val text = binding!!.etMessageText.text.toString()
             val time = Date()
-            var message = Messages("", text, "", "", time, senderUid)
+            var message = Messages("", text, "", "", time.time, senderUid)
             binding!!.etMessageText.setText("")
 
+            adapter!!.notifyDataSetChanged()
             val lastMsgObj = HashMap<String, Any>()
             lastMsgObj["lastMsg"] = message.text!!
             lastMsgObj["lastMsgTime"] = message.time!!
+
             var document: DocumentReference =
                 firestore.collection("Users").document(receiverUid.toString()).collection("chats")
                     .document(senderUid.toString()).collection("Messages")
                     .document()
+
+            adapter!!.notifyDataSetChanged()
             document.set(message).addOnSuccessListener {
                 Log.d("aviso", "se paso el mensaje ")
                 document = firestore.collection("Users").document(receiverUid.toString())
                     .collection("chats").document(senderUid.toString()).collection("Messages")
                     .document()
+                adapter!!.notifyDataSetChanged()
                 document.set(message).addOnSuccessListener {
+
                     Log.d("aviso", "aqui tambien se logro")
                 }
             }
         }
+        adapter!!.notifyDataSetChanged()
 
         val handler = Handler()
         binding!!.etMessageText.addTextChangedListener(object :TextWatcher{
@@ -178,18 +197,26 @@ class  ChatActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val currentId = FirebaseAuth.getInstance().uid
+                /*
                 val document : DocumentReference =
                     firestore.collection("Users").document(currentId.toString())
                         .collection("Status").document()
                 document.set("Typing...")
+
+                 */
             }
 
             override fun afterTextChanged(s: Editable?) {
+
                 val currentId = FirebaseAuth.getInstance().uid
+                    /*
                 val document : DocumentReference =
                     firestore.collection("Users").document(currentId.toString())
                 .collection("Status").document()
                 document.set("offline")
+
+                     */
+
             }
 
         })
@@ -214,18 +241,28 @@ class  ChatActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         val state : String = "offline"
-        val currentId = FirebaseAuth.getInstance().uid
-        val document : DocumentReference =
-            firestore.collection("Users").document(currentId.toString())
-        document.set(state)
-    }
+/*
+val currentId = FirebaseAuth.getInstance().uid
+val document : DocumentReference =
+ firestore.collection("Users").document(currentId.toString()).collection("Status")
+     .document()
+document.set(state)
 
-    override fun onResume() {
-        super.onResume()
-        val currentId = FirebaseAuth.getInstance().uid
-        val state : String = "online"
-        val document : DocumentReference =
-            firestore.collection("Users").document(currentId.toString())
-        document.set(state)
-    }
+ */
+}
+
+override fun onResume() {
+super.onResume()
+val currentId = FirebaseAuth.getInstance().uid
+val state : String = "online"
+/*
+val document : DocumentReference =
+ firestore.collection("Users").document(currentId.toString()).collection("Status")
+     .document()
+document.set(state)
+
+*/
+}
+
+
 }

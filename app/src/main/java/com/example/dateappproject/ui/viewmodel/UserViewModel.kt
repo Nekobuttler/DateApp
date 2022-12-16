@@ -28,7 +28,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     */
 
 
-    suspend fun deleteUser(user: Users) {
+     fun deleteUser(user: Users) {
         viewModelScope.launch {
             repository.deleteUser(user)
         }

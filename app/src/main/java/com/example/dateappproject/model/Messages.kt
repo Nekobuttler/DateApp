@@ -15,12 +15,12 @@ data class Messages(
     val text :String?,
     val type : String?,
     val imageUrl : String?,
-    val time : Date?,
+    val time : Long?,
     var senderId : String?
 
 
 ):Parcelable  {
 
     constructor():
-            this("" , "" , "" , ""  ,null,"")
+            this("" , "" , "" , ""  ,0,"")
 }

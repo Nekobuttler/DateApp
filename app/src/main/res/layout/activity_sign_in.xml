@@ -6,58 +6,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Auth.SignInActivity" >
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="DateApp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold|italic" />
+    tools:context=".Auth.SignInActivity"
+    android:gravity="center">
 
-    <TextView
-        android:id="@+id/tv_Username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Username or Email"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="226dp"
+        android:layout_height="282dp"
+        android:padding="10dp"
+        app:srcCompat="@drawable/logo_color"
+        android:layout_marginBottom="30dp"/>
+
 
     <EditText
         android:id="@+id/et_Email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_person"
         android:ems="10"
-        android:inputType="textEmailAddress" />
-
-    <TextView
-        android:id="@+id/tv_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Password"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:hint="Username or Email"
+        android:inputType="textEmailAddress"
+        android:layout_marginBottom="20dp"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/ed_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
         android:ems="10"
-        android:inputType="textPassword" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="53dp">
-
-        <ImageButton
-            android:id="@+id/bt_signin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/ic_signin" />
-
-    </LinearLayout>
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="10dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -67,17 +48,41 @@
             android:id="@+id/tv_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Already got an account register here"
-            tools:layout_editor_absoluteX="92dp"
-            tools:layout_editor_absoluteY="196dp" />
+            android:text="Already got an account  Login in here"
+            android:textColor="#6B93D6"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.457" />
 
         <Button
-            android:id="@+id/bt_Login_Sign"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            tools:layout_editor_absoluteX="152dp"
-            tools:layout_editor_absoluteY="333dp" />
+            android:id="@+id/bt_SignIn"
+            android:layout_width="129dp"
+            android:layout_height="71dp"
+            android:text="Sign In"
+            android:textSize="18dp"
+            app:backgroundTint="#58C530"
+            app:cornerRadius="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.46"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.157" />
+
+        <ImageButton
+            android:id="@+id/GoogleSignIn"
+            android:layout_width="71dp"
+            android:layout_height="61dp"
+            app:srcCompat="@drawable/googleg_disabled_color_18"
+            tools:layout_editor_absoluteX="158dp"
+            tools:layout_editor_absoluteY="214dp"
+            app:backgroundTint="#DAD7F1"
+            app:tint="#27772A"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

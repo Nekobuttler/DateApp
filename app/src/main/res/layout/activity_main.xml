@@ -4,20 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Auth.MainActivity" >
-
-    <TextView
-        android:id="@+id/tv_appName"
-        android:layout_width="144dp"
-        android:layout_height="56dp"
-        android:text="Date App"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.535"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.106" />
+    tools:context=".Auth.MainActivity"
+   >
 
     <Button
         android:id="@+id/bt_signIn"
@@ -50,4 +38,12 @@
         app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
         tools:layout_editor_absoluteX="175dp"
         tools:layout_editor_absoluteY="443dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="297dp"
+        android:layout_height="259dp"
+        app:srcCompat="@drawable/logo_color"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="11dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

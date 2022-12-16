@@ -83,9 +83,9 @@
     android:id="@+id/linearLayoutOwnRecycler">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/messagesRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:visibility="visible"
 
         >
@@ -108,7 +108,7 @@
         android:weightSum="2">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="350dp"
+            android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"

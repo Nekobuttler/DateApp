@@ -17,16 +17,22 @@
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DateAppProject"
-        android:enableOnBackInvokedCallback="true"
         tools:targetApi="30">
         <activity
+            android:name=".UpdateProfile"
+            android:exported="false" />
+        <activity
             android:name=".ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".set_up_age_gender"
             android:exported="false" />
         <activity
             android:name=".UsersSelection"
@@ -51,6 +57,7 @@
         <activity android:name=".Auth.LoginMainActivity" />
         <activity android:name=".Auth.SignInActivity" />
         <activity android:name=".SetUpProfile" />
+
 
         <provider
             android:name="androidx.core.content.FileProvider"

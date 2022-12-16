@@ -2,6 +2,7 @@ package com.example.dateappproject.Adapters
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,17 +20,18 @@ import com.google.firebase.auth.FirebaseAuth
 //class MessageAdapter : RecyclerView.Adapter<MessageAdapter.MessageViewHolder >(){
 
 class MessageAdapter( var context : Context,
-    messagesList: ArrayList<Messages>,
-    senderRoom : String ,
-    receiverRoom : String ) : RecyclerView.Adapter<RecyclerView.ViewHolder >(){
+    messagesList: ArrayList<Messages>?,
+    sender : String ,
+    receiver : String ) : RecyclerView.Adapter<RecyclerView.ViewHolder >(){
 
     lateinit var messagesList : ArrayList<Messages>
+
 
     val ITEM_SENT = 1
     val ITEM_RECIEVE = 2
 
-    val senderRoom : String
-    val receiverRoom : String
+    val sender : String
+    val receiver : String
 
     inner class SendMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var binding : MessageSendBinding = MessageSendBinding.bind(itemView)
@@ -42,24 +44,29 @@ class MessageAdapter( var context : Context,
 
     }
     init{
+        Log.d("aaaaa", "inicializando datos")
         if(messagesList != null ){
             this.messagesList = messagesList
         }
-        this.senderRoom = senderRoom
-        this.receiverRoom = receiverRoom
+        this.sender = sender
+        this.receiver = receiver
     }
 
 
     override fun getItemViewType(position: Int): Int {
+        Log.d("analizando" , "esperando")
         val messages = messagesList[position]
-        return if(FirebaseAuth.getInstance().uid == messages.senderId){
+        return if(FirebaseAuth.getInstance().uid != messages.senderId){
             ITEM_SENT
+            Log.d("analizando" , "itemsent")
         }else{
             ITEM_RECIEVE
+            Log.d("analizando" , "iten recieve")
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        Log.d("aaa" , "esta analizando")
         return  if (viewType == ITEM_SENT){
            val view : View = LayoutInflater.from(context).inflate(R.layout.message_send,
                                                                     parent,
@@ -92,6 +99,17 @@ class MessageAdapter( var context : Context,
 
 
                 Toast.makeText(context, "You're touching me.... kya!!!",Toast.LENGTH_LONG).show()
+            }
+        }else{
+            val viewHolder = holder as ReceivedMessageViewHolder
+            if(message.type.equals("photo")){
+                viewHolder.binding.imgReceive.visibility = View.VISIBLE
+                viewHolder.binding.sendReceive.visibility = View.GONE
+                viewHolder.binding.receiveMessageHolder.visibility = View.GONE
+                Glide.with(context)
+                    .load(message.imageUrl)
+                    .placeholder(R.drawable.example)
+                    .into(viewHolder.binding.imgReceive)
             }
         }
     }

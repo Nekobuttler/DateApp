@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".set_up_age_gender">
+
+
+    <EditText
+        android:id="@+id/pickDateED"
+        android:layout_width="208dp"
+        android:layout_height="50dp"
+        android:text="Pick your age"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="99dp"
+        tools:layout_editor_absoluteY="73dp" />
+
+    <TextView
+        android:id="@+id/ageSelection"
+        android:layout_width="230dp"
+        android:layout_height="57dp"
+        android:text="Pick your gender"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="217dp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkedButton="@+id/radio_button_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ageSelection">
+
+        <RadioButton
+            android:id="@+id/radio_Women"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Women" />
+
+        <RadioButton
+            android:id="@+id/radio_Men"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Men" />
+
+        <RadioButton
+            android:id="@+id/radio_NonBi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Non-Binary" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="621dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

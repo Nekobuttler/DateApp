@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import com.example.dateappproject.databinding.ActivitySetUpAgeGenderBinding
 import com.example.dateappproject.databinding.ActivitySetUpProfileBinding
 import com.example.dateappproject.model.Users
 import com.example.dateappproject.ui.viewmodel.UserViewModel
@@ -86,7 +87,7 @@ class SetUpProfile : AppCompatActivity() {
                         // val phone = auth!!.currentUser?.phoneNumber
                         val email =  auth!!.currentUser?.email.toString()
                         val name : String? = binding!!.etUsername.text.toString()
-                        val user = Users(uid , name , email , "" , null, 0  , "" , "" ,"",null,imageUrl)
+                        val user = Users(uid , name , email , "" , null, 0  , "" , "" ,"","",imageUrl)
                         val doc : DocumentReference = firestore!!.collection("Users").document(uid.toString())
                         if(doc != null){
                             doc.set(user)
@@ -96,9 +97,12 @@ class SetUpProfile : AppCompatActivity() {
                         }
 
                         //     dialog!!.dismiss()
-                        val intent =
-                            Intent(this, DateAppMainActivity::class.java)
+                        val intent = Intent(this, ActivitySetUpAgeGenderBinding::class.java)
                         startActivity(intent)
+
+                       // val intent =
+                         //   Intent(this, DateAppMainActivity::class.java)
+                       // startActivity(intent)
                         finish()
 
 
@@ -113,7 +117,7 @@ class SetUpProfile : AppCompatActivity() {
                     userViewModel.saveUser(user)
                     //   dialog!!.dismiss()
                     val intent = Intent(this@SetUpProfile
-                        , DateAppMainActivity :: class.java)
+                        , ActivitySetUpAgeGenderBinding :: class.java)
                     startActivity(intent)
                     finish()
 

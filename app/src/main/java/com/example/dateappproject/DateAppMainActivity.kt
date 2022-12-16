@@ -2,9 +2,7 @@ package com.example.dateappproject
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,14 +15,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.dateappproject.Auth.MainActivity
 import com.example.dateappproject.databinding.ActivityDateAppMainBinding
 import com.example.dateappproject.model.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -77,10 +73,12 @@ class DateAppMainActivity : AppCompatActivity() {
             FirebaseAuth.getInstance().signOut();
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
         navView.getHeaderView(0).findViewById<ImageView>(R.id.user_profile_picture).setOnClickListener{
             val intent = Intent(this, ProfileShowUp::class.java)
             startActivity(intent)
+            finish()
         }
 
         update(navView)
@@ -100,11 +98,12 @@ class DateAppMainActivity : AppCompatActivity() {
                 val User = documentSnapshot.toObject<Users>()
 
                 tvName.text = User!!.name
-                tvemail.text = User.email
-                val pictureURL = User.profileMainPicture
+                tvemail.text = User!!.email
+
+                val pictureURL = User!!.profileMainPicture
                 if (pictureURL!!.isNotEmpty()) {
                     Glide.with(this)
-                        .load(R.drawable.music_video_asmr_man)
+                        .load(User.profileMainPicture)
                         .load(tvName)
                         //.load(pictureURL)
                         //.load(tvName)
@@ -113,13 +112,21 @@ class DateAppMainActivity : AppCompatActivity() {
                         .into(image)
                 } else {
                     Glide.with(this)
-                        .load(R.drawable.ic_baseline_person_outline_24)
+                        .load(R.drawable.ic_person)
                         .load("name")
                         .load(tvemail)
                         .circleCrop()
                         .into(image)
                 }
             }
+
+
+
+        view.setOnClickListener {
+            val intent = Intent(this , UpdateProfile::class.java)
+            startActivity(intent)
+            finish()
+        }
 
     }
 

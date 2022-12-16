@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dateappproject.DateAppMainActivity
 import com.example.dateappproject.SetUpProfile
+import com.example.dateappproject.databinding.ActivitySetUpAgeGenderBinding
 import com.example.dateappproject.databinding.LoginActivityBinding
 import com.example.dateappproject.model.Users
 
@@ -85,11 +86,15 @@ class LoginMainActivity : AppCompatActivity() {
                 .get().addOnSuccessListener {
                         documentSnapshot ->
                     val User = documentSnapshot.toObject<Users>()
-                    if(User?.name!!.isEmpty()){
+                    if(User?.name!!.isEmpty()) {
                         val intent = Intent(this, SetUpProfile::class.java)
                         startActivity(intent)
-
-                }else{
+                    }
+                    if (User.birthdate!!.isEmpty()){
+                        val intent = Intent(this, ActivitySetUpAgeGenderBinding::class.java)
+                        startActivity(intent)
+                        finish()
+                    }else{
                         val intent = Intent(this, DateAppMainActivity::class.java)
                         startActivity(intent)
                     }
@@ -98,8 +103,7 @@ class LoginMainActivity : AppCompatActivity() {
 
                 //Tratar de comprobar si los datos de img ruta y nombre estan llenos
                 //Hacer snapshot guardar datos en variable temporal y luego comparar dentro de esta? 
-            val intent = Intent(this, DateAppMainActivity::class.java)
-            startActivity(intent)
+
 
         }else{
 

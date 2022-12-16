@@ -15,19 +15,19 @@ data class Users(
     val location : Location ?,
     val age : Int?,
     val biography : String?,
-    val gender : String?,
+    var gender : String?,
     val interests : String?,
-    val birthdate : Calendar?,
+    var birthdate : String?,
     val profileMainPicture : String?,
 
 
 
 
-):Parcelable  {
+    ):Parcelable  {
 
 
     constructor():
-            this("" , "" , "" , "" , null, 0  , "" , "" ,"",null,"")
+            this("" , "" , "" , "" , null, 0  , "" , "" ,"","","")
 
 
 }
